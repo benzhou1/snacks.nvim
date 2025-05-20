@@ -181,6 +181,7 @@ function M.get_locations(method, opts, filter)
   fname = svim.fs.normalize(fname)
   local cursor = vim.api.nvim_win_get_cursor(win)
   local bufmap = M.bufmap()
+  local done = {} ---@type table<string, boolean>
 
   ---@async
   ---@param cb async fun(item: snacks.picker.finder.Item)
@@ -217,7 +218,6 @@ function M.get_locations(method, opts, filter)
         end, items)
       end
 
-      local done = {} ---@type table<string, boolean>
       for _, loc in ipairs(items) do
         ---@type snacks.picker.finder.Item
         local item = {
